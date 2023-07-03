@@ -15,11 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Main library of the quizaccess_announcements plugin.
- * Only used to serve plugin files.
+ * Lib to serve plugin files for quizaccess_announcements plugin.
  *
- * @package    quizaccess
- * @subpackage announcements
+ * @package    quizaccess_announcements
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

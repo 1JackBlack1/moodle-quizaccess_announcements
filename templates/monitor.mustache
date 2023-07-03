@@ -47,5 +47,6 @@
 <p id="{{uniqid}}-QuizAnnouncements_monitor_lastpost">{{lastposted}}</p>
 </div>
 {{#js}}
-    require(['quizaccess_announcements/monitor'], (module) => module.init({{quizid}}, {{checkinterval}}, {{refreshinterval}}, "{{uniqid}}-QuizAnnouncements_monitor_lastpost", "{{tableid}}"));
+    require(['quizaccess_announcements/monitor'], (module) => module.init({{quizid}},
+        {{checkinterval}}, {{refreshinterval}}, "{{uniqid}}-QuizAnnouncements_monitor_lastpost", "{{tableid}}"));
 {{/js}}

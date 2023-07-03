@@ -46,7 +46,7 @@ var ecnt;
  *
  * @param {Element} row row to remove classes for.
  */
-function clearclasses(row){
+function clearclasses(row) {
     row.classList.remove('table-success');
     row.classList.remove('table-warning');
     row.classList.remove('table-danger');
@@ -57,6 +57,7 @@ function clearclasses(row){
  *
  * @param {Element} ntbody new table body element to add row to.
  * @param {number|false} last timestamp of last time announcement was posted.
+ * @returns {function} a function that can be passed a student to update.
  */
 function updatestudentnow(ntbody, last) {
     /**
@@ -66,7 +67,7 @@ function updatestudentnow(ntbody, last) {
      */
     return function updatestudent(student) {
         let row = tcont.querySelector('tr.u_' + student.userid);
-        if(!row) {
+        if (!row) {
             window.console.log("Unable to find row for student " + student.userid);
             return;
         }
@@ -74,16 +75,16 @@ function updatestudentnow(ntbody, last) {
             clearclasses(row);
             row.querySelector('td.cell.time').innerHTML = student.str;
             row.querySelector('td.cell.ago').innerHTML = student.ago;
-            if(student.ago > studentinterval*2) {
+            if (student.ago > studentinterval * 2) {
                 row.classList.add('table-danger');
-            } else if(student.ago > studentinterval) {
+            } else if (student.ago > studentinterval) {
                 row.classList.add('table-warning');
-            } else if((last !== null) && (last > student.time)){
+            } else if ((last !== null) && (last > student.time)) {
                 row.classList.add('table-warning');
             } else {
                 row.classList.add('table-success');
             }
-        } catch(e){
+        } catch (e) {
             window.console.error("Error updating student status", e);
             ecnt = 10;
         }
@@ -95,7 +96,7 @@ function updatestudentnow(ntbody, last) {
  * Makes request to get status.
  *
  */
-async function fetchstatus(){
+async function fetchstatus() {
     var getstatusp = getstatus(quizid)
     .then((statret) => {
         ecnt = 0;
@@ -103,7 +104,7 @@ async function fetchstatus(){
         var ntbody = document.createElement('tbody');
         statret.status.forEach(updatestudentnow(ntbody, statret.last.time));
         var row = tcont.rows[0];
-        while(row){
+        while (row) {
             clearclasses(row);
             ntbody.appendChild(row);
             row = tcont.rows[0];
@@ -123,6 +124,7 @@ async function fetchstatus(){
         getString('monitor_ajax_error', 'quizaccess_announcements')
         .then((str) => {
             hcont.innerHTML = str;
+            return str;
         }).catch((err) => {
             window.console.error("Error getting string", err);
             hcont.innerHTML = 'Error fetching student status. Additionally, error fetching error string.';
@@ -139,14 +141,14 @@ async function fetchstatus(){
  * @param {string} lastid id of the last post status element.
  * @param {string} contid id of the container element.
  */
-function init(qid, checkinterval, interval, lastid, contid){
+function init(qid, checkinterval, interval, lastid, contid) {
     quizid = qid;
     studentinterval = parseInt(checkinterval);
-    delay = parseInt(interval)*1000;
+    delay = parseInt(interval) * 1000;
     hcont = document.getElementById(lastid);
     tcont = document.getElementById(contid);
     ecnt = 0;
-    if(!(tcont && (tcont = tcont.querySelector('tbody')))){
+    if (!(tcont && (tcont = tcont.querySelector('tbody')))) {
         window.console.error("Unable to find table body to update.", contid);
         return;
     }

@@ -18,8 +18,7 @@
  * Defines the add announcement form class for the quizaccess_announcements plugin.
  * Used to confirm before the announcement is actually deleted.
  *
- * @package    quizaccess
- * @subpackage announcements
+ * @package    quizaccess_announcements
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

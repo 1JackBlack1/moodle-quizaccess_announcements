@@ -24,7 +24,7 @@
 import {getannouncements} from './repository';
 import Templates from 'core/templates';
 import ModalFactory from 'core/modal_factory';
-import {get_string} from 'core/str';
+import * as Str from 'core/str';
 
 
 /**
@@ -49,7 +49,7 @@ var modal;
  * @param {string} newanons string containing text of new announcements.
  */
 const showmodal = (newanons) => {
-    if(modal.isVisible()) {
+    if (modal.isVisible()) {
         Templates.appendNodeContents(modal.body, newanons, '');
     } else {
         Templates.replaceNodeContents(modal.body, newanons, '');
@@ -63,10 +63,10 @@ const showmodal = (newanons) => {
  * @param {string} newanons HTML containing new announcements.
  */
 const addanons = (newanons) => {
-    if(!newanons){
+    if (!newanons) {
         return;
     }
-    if(noneyet){
+    if (noneyet) {
         noneyet.remove();
     }
     Templates.appendNodeContents(anoncont, newanons, '');
@@ -81,7 +81,7 @@ const fetchannouncements = async() => {
     var getanonp = getannouncements(quizid, lastfetched)
     .then((newanons) => {
         addanons(newanons.content);
-        lastfetched=newanons.lasttime;
+        lastfetched = newanons.lasttime;
         return newanons;
     }).catch((err) => {
         window.console.error("Error in AJAX request", err);
@@ -104,12 +104,12 @@ const fetchannouncements = async() => {
 export const init = (qid, poll, now, containerid, header, toshow) => {
     Templates.prependNodeContents(document.getElementById('region-main'), header, '');
     anoncont = document.getElementById(containerid);
-    if(poll && anoncont){
+    if (poll && anoncont) {
         quizid = qid;
-        delay = parseInt(poll)*1000;
+        delay = parseInt(poll) * 1000;
         noneyet = anoncont.querySelector('[data-noannouncements]');
         lastfetched = now;
-        get_string('popupheader', 'quizaccess_announcements')
+        Str.get_string('popupheader', 'quizaccess_announcements')
         .then((str) => {
             return ModalFactory.create({
                 title: str,
@@ -118,11 +118,13 @@ export const init = (qid, poll, now, containerid, header, toshow) => {
             });
         }).then((m) => {
             modal = m;
-            if(toshow){
+            if (toshow) {
                 showmodal(toshow);
             }
             window.setTimeout(fetchannouncements, delay);
             return m;
+        }).catch((err) => {
+            window.console.error('Error setting up announcements', err);
         });
     }
 };

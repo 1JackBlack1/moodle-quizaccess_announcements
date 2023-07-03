@@ -1,0 +1,51 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template quizaccess_announcements/manage
+
+    Template for the quiz status monitoring page
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * quizid id of the quiz you are monitoring.
+    * checkinterval polling interval for students checking announcements.
+    * refreshinterval polling interval to check student status.
+    * lastposted HTML string showing the time the last announcement was posted.
+    * tableid the id of the table (generated elsewhere) which shows the current student status.
+
+    Example context (json):
+    {
+        "quizid": 5,
+        "checkinterval": 30,
+        "refreshinterval": 15,
+        "lastposted": "The last announcement was posted at 13:51, which was 15 seconds ago.",
+        "tableid": "quizaccess_announcements_student_status"
+    }
+}}
+<div class="quizaccess_announcements_monitor">
+<h2>{{#str}}monitor_header, quizaccess_announcements{{/str}}</h2>
+<p>{{#str}}monitor_pre_text, quizaccess_announcements, {{checkinterval}}{{/str}}</p>
+<p id="{{uniqid}}-QuizAnnouncements_monitor_lastpost">{{lastposted}}</p>
+</div>
+{{#js}}
+    require(['quizaccess_announcements/monitor'], (module) => module.init({{quizid}}, {{checkinterval}}, {{refreshinterval}}, "{{uniqid}}-QuizAnnouncements_monitor_lastpost", "{{tableid}}"));
+{{/js}}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/quiz/accessrule/announcements/db" VERSION="20230317" COMMENT="XMLDB file for Moodle mod/quiz/accessrule/announcements"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="quizaccess_announcements_qui" COMMENT="Quiz level configuration">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="quizid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to quiz id"/>
+        <FIELD NAME="useannouncements" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="Boolean to enable announcements."/>
+        <FIELD NAME="checkinterval" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Time to wait between successive checks for announcements."/>
+        <FIELD NAME="header" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="HTML that is displayed at top of quiz attempt, above the announcements."/>
+        <FIELD NAME="headerformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="quizid" TYPE="foreign" FIELDS="quizid" REFTABLE="quiz" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="quizaccess_announcements_ann" COMMENT="Stores individual announcements.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="quizid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to quiz id."/>
+        <FIELD NAME="content" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Announcement content."/>
+        <FIELD NAME="contentformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timeposted" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="quizid" TYPE="foreign" FIELDS="quizid" REFTABLE="quiz" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="timeposted" UNIQUE="false" FIELDS="timeposted"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="quizaccess_announcements_sta" COMMENT="Stores the last time an announcement was fetched.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="quizid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to quiz id."/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to user id."/>
+        <FIELD NAME="timefetched" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Time user last fetched an announcement"/>
+        <FIELD NAME="previousfetch" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Time prior to last that user fetched an announcement"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="quizid" TYPE="foreign" FIELDS="quizid" REFTABLE="quiz" REFFIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="timefetched" UNIQUE="false" FIELDS="timefetched"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

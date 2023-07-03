@@ -1,0 +1,21 @@
+/** Bits that can appear on multiple pages. */
+.path-mod-quiz .quizaccess_announcements_attempt {
+    width: 100%;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: lightpink;
+}
+
+.path-mod-quiz .quizaccess_announcements_announcement + .quizaccess_announcements_announcement {
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid black;
+}
+
+/** styles specific to the manage announcement page. */
+#page-mod-quiz-accessrule-announcements-announcements a[href*="delete"] + .quizaccess_announcements_announcement {
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid black;
+}

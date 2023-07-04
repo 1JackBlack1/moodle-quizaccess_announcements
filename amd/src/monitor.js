@@ -106,6 +106,8 @@ async function fetchstatus() {
         var row = tcont.rows[0];
         while (row) {
             clearclasses(row);
+            row.querySelector('td.cell.time').innerHTML = '-';
+            row.querySelector('td.cell.ago').innerHTML = '-';
             ntbody.appendChild(row);
             row = tcont.rows[0];
         }

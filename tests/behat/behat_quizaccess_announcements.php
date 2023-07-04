@@ -170,7 +170,7 @@ class behat_quizaccess_announcements extends behat_base {
      * | username | time | prev |
      *
      * username    the username of the student.
-     * time        Time student last fetched announcements. Can be now, # s ago, or a unix timestamp.
+     * time        Time student last fetched announcements. Can be now, # s ago, or a unix timestamp or "none".
      * prev        Optional column for the previous time the student fetched announcements.
      *
      * Then there should be a number of rows of data, one for each student you want to update.
@@ -192,13 +192,18 @@ class behat_quizaccess_announcements extends behat_base {
                         'the time column is required.', $this->getSession());
             }
             $username = $studata['username'];
-            $time = $this->parse_time($studata['time']);
-            if (array_key_exists('prev', $studata)) {
-                $prev = $this->parse_time($studata['prev']);
+            $time = $studata['time'];
+            if ($time === "none" ) {
+                $this->remove_student_status($quizid, $username);
             } else {
-                $prev = $time;
+                $time = $this->parse_time($time);
+                if (array_key_exists('prev', $studata)) {
+                    $prev = $this->parse_time($studata['prev']);
+                } else {
+                    $prev = $time;
+                }
+                $this->update_student_status($quizid, $username, $time, $prev);
             }
-            $this->update_student_status($quizid, $username, $time, $prev);
         }
     }
 
@@ -247,6 +252,17 @@ class behat_quizaccess_announcements extends behat_base {
                 "//td[contains(@class, 'username') and " .
                 "normalize-space(text())='" . $username . "']";
             $this->find('xpath', $xpath, $exception);
+            if ($status === 'none') {
+                $exception = new ExpectationException('Student "' . $username . '" ' .
+                            'displays a time when they should have none' .
+                            ' for quizaccess_announcements.', $this->getSession());
+                $xpath = "//table[@id = 'quizaccess_announcements_status']" .
+                    "//tr[td[contains(@class, 'username') and " . 
+                    "normalize-space(text())='" . $username . "'] and " .
+                    "td[contains(@class, 'time') and normalize-space(text())='-'] and " .
+                    "td[contains(@class, 'ago') and normalize-space(text())='-']]";
+                $this->find('xpath', $xpath, $exception);
+            }
         }
     }
 
@@ -298,7 +314,7 @@ class behat_quizaccess_announcements extends behat_base {
     }
 
     /**
-     * Update Student Status in the database.
+     * Update student status in the database.
      *
      * @param int $quizid the id of the quiz to add an announecment to.
      * @param text $username the username of the student to update.
@@ -323,7 +339,7 @@ class behat_quizaccess_announcements extends behat_base {
 
         // Check if old student status record exists.
         $oldrec = $DB->get_record('quizaccess_announcements_sta', ["quizid" => $quizid, "userid" => $userid]);
-        if (!empty($last)) {
+        if (!empty($oldrec)) {
             $oldrec->timefetched = $time;
             $oldrec->previousfetch = $prev;
             $DB->update_record('quizaccess_announcements_sta', $oldrec);
@@ -335,6 +351,23 @@ class behat_quizaccess_announcements extends behat_base {
             $status->previousfetch = $prev;
             $DB->insert_record('quizaccess_announcements_sta', $status);
         }
+    }
+
+    /**
+     * Remove student status from database (for finished attempt).
+     *
+     * @param int $quizid the id of the quiz to add an announecment to.
+     * @param text $username the username of the student to remove.
+     */
+    protected function remove_student_status($quizid, $username) {
+        global $DB;
+
+        // Get user.
+        $user = $DB->get_record('user', ['username' => $username], '*', MUST_EXIST);
+        $userid = $user->id;
+
+        // Delete matching records.
+        $DB->delete_records('quizaccess_announcements_sta', ["quizid" => $quizid, "userid" => $userid]);
     }
 
     /**

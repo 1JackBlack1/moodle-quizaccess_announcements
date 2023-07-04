@@ -11,7 +11,8 @@ Feature: Check that student status displays correctly.
       | student2 | Student   | Two      | student2@example.com |
       | student3 | Student   | Three    | student3@example.com |
       | student4 | Student   | Four     | student4@example.com |
-      | student5 | Student   | Four     | student5@example.com |
+      | student5 | Student   | Five     | student5@example.com |
+      | student6 | Student   | Six      | student5@example.com |
     And the following "course enrolments" exist:
       | user     | course | role    |
       | student1 | C1     | student |
@@ -19,6 +20,7 @@ Feature: Check that student status displays correctly.
       | student3 | C1     | student |
       | student4 | C1     | student |
       | student5 | C1     | student |
+      | student6 | C1     | student |
     And the following "activities" exist:
       | activity | course | section | name   |
       | quiz     | C1     | 1       | Quiz 1 |
@@ -31,6 +33,7 @@ Feature: Check that student status displays correctly.
       | student2 | 30 s ago  |
       | student3 | 90 s ago  |
       | student4 | 200 s ago |
+      | student5 | 5 s ago   |
 
   Scenario: Monitor correctly shows student status.
     When I am on the "Quiz 1" "quizaccess_announcements > monitor" page logged in as admin
@@ -40,7 +43,8 @@ Feature: Check that student status displays correctly.
       | student2 | success |
       | student3 | warning |
       | student4 | danger  |
-      | student5 | none    |
+      | student5 | success |
+      | student6 | none    |
     And quiz "Quiz 1" has announcement "New announcement" posted "20" s ago
     And quiz "Quiz 1" has the following student status for quizaccess_announcements:
       | username | time      |
@@ -48,6 +52,8 @@ Feature: Check that student status displays correctly.
       | student2 | 40 s ago  |
       | student3 | 90 s ago  |
       | student4 | 200 s ago |
+      | student5 | none      |
+      | student6 | 5 s ago   |
     And I wait "20" seconds
     And the quizaccess_announcements status table should have the following statuses:
       | username | status  |
@@ -56,6 +62,7 @@ Feature: Check that student status displays correctly.
       | student3 | warning |
       | student4 | danger  |
       | student5 | none    |
+      | student6 | success |
     And I am on the "Quiz 2" "quizaccess_announcements > monitor" page
     And the quizaccess_announcements status table should have the following statuses:
       | username | status  |
@@ -64,4 +71,4 @@ Feature: Check that student status displays correctly.
       | student3 | none    |
       | student4 | none    |
       | student5 | none    |
-      | student5 | none    |
+      | student6 | none    |

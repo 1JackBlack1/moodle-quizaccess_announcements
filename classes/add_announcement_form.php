@@ -14,6 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace quizaccess_announcements;
+defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->libdir.'/formslib.php');
+
 /**
  * Defines the add announcement form class for the quizaccess_announcements plugin.
  *
@@ -21,15 +26,10 @@
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace quizaccess_announcements;
-defined('MOODLE_INTERNAL') || die();
-
-require_once($CFG->libdir.'/formslib.php');
-
 class add_announcement_form extends \moodleform {
-    /** The id of the quiz */
+    /** @var id The id of the quiz */
     private $quizid;
-    /** The context module for this quiz */
+    /** @var object The context module for this quiz */
     private $context;
 
     /**
@@ -44,6 +44,7 @@ class add_announcement_form extends \moodleform {
         parent::__construct('announcements.php');
     }
 
+    /** Function providing the form definition */
     public function definition() {
         $mform = $this->_form;
 
@@ -74,6 +75,13 @@ class add_announcement_form extends \moodleform {
             'add_announcement_button', 'quizaccess_announcements'));
     }
 
+    /**
+     * Function for validating data
+     *
+     * @param array $data the data passed to the form for validation
+     * @param array $files the files passed to the form for validation
+     * @return array A list of any errors
+     */
     public function validation($data, $files) {
         $errors = [];
         if (empty($data['content']['text'])) {

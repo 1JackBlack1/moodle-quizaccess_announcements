@@ -14,6 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace quizaccess_announcements\privacy;
+use \core_privacy\local\metadata\null_provider;
+
 /**
  * Privacy information for the quizaccess_announcements plugin.
  *
@@ -21,10 +24,6 @@
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace quizaccess_announcements\privacy;
-use \core_privacy\local\metadata\null_provider;
-
 class provider implements \core_privacy\local\metadata\null_provider {
     /**
      * Get the language string identifier with the component's language

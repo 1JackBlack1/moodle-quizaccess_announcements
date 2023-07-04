@@ -14,6 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace quizaccess_announcements;
+use moodle_url;
+
 /**
  * Class to avoid code duplication for the quizaccess_announcements plugin.
  *
@@ -21,9 +24,6 @@
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace quizaccess_announcements;
-use moodle_url;
-
 class manage_monitor_buttons {
     /**
      * Gets the buttons for staff associated with the quiz

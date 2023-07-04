@@ -257,7 +257,7 @@ class behat_quizaccess_announcements extends behat_base {
                             'displays a time when they should have none' .
                             ' for quizaccess_announcements.', $this->getSession());
                 $xpath = "//table[@id = 'quizaccess_announcements_status']" .
-                    "//tr[td[contains(@class, 'username') and " . 
+                    "//tr[td[contains(@class, 'username') and " .
                     "normalize-space(text())='" . $username . "'] and " .
                     "td[contains(@class, 'time') and normalize-space(text())='-'] and " .
                     "td[contains(@class, 'ago') and normalize-space(text())='-']]";

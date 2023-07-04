@@ -14,6 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace quizaccess_announcements;
+
+defined('MOODLE_INTERNAL') || die();
+require_once($CFG->libdir . '/tablelib.php');
+use table_sql;
+
 /**
  * Defines status table for the quizaccess_announcements plugin.
  *
@@ -21,18 +27,12 @@
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace quizaccess_announcements;
-
-defined('MOODLE_INTERNAL') || die();
-require_once($CFG->libdir . '/tablelib.php');
-use table_sql;
-
 class status_table extends table_sql {
-    /** The current timestamp */
+    /** @var int The current timestamp */
     private $now;
-    /** The time between successive checks, used to determine status */
+    /** @var int The time between successive checks, used to determine status */
     private $checkinterval;
-    /** The last announcement object, used to determine status */
+    /** @var int The last announcement object, used to determine status */
     private $lastannouncement;
     /**
      * Construct function for this table.

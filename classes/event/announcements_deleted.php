@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace quizaccess_announcements\event;
+
 /**
- * The announcement deleted event class for the quizaccess_announcements plugin.
+ * The announcements deleted event class for the quizaccess_announcements plugin.
  *
  * @package    quizaccess_announcements
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace quizaccess_announcements\event;
-
 class announcements_deleted extends \core\event\base {
 
     /**

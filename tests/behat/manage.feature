@@ -18,4 +18,4 @@ Feature: Check that I can add and remove announcements.
     And I should not see "No announcements have been made."
     And I press "Delete all announcements"
     And I press "Yes I am sure I wish to delete the announcement(s)"
-    And I should see "No announcements have been made." 
+    And I should see "No announcements have been made."

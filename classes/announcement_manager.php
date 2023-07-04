@@ -14,6 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace quizaccess_announcements;
+use context_module;
+use stdClass;
+
 /**
  * announcement manager class for the quizaccess_announcements plugin.
  *
@@ -21,27 +25,22 @@
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace quizaccess_announcements;
-use context_module;
-use stdClass;
-
 class announcement_manager {
-    /** raw announcements from DB */
+    /** @var array raw announcements from DB */
     private $rawannouncements = [];
-    /** Announcements passed through format_text */
+    /** @var array Announcements passed through format_text */
     private $formattedannouncements = [];
-    /** final rendered announcements */
+    /** @var array final rendered announcements */
     private $renderedannouncements = [];
-    /** id for the quiz */
+    /** @var int id for the quiz */
     private $quizid;
-    /** The context module for the quiz */
+    /** @var object The context module for the quiz */
     private $context;
-    /** Bool indicating if announcements have been loaded */
+    /** @var bool indicating if announcements have been loaded */
     private $loaded = false;
-    /** Bool indicating if announcements have been rendered */
+    /** @var bool indicating if announcements have been rendered */
     private $rendered = false;
-    /** table of format options */
+    /** @var array table of format options */
     private $formatoptions = [];
 
     /**

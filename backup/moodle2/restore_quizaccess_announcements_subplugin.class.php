@@ -25,6 +25,9 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/backup/moodle2/restore_mod_quiz_access_subplugin.class.php');
 
+/**
+ * Class to restore the quizaccess_announcements plugin.
+ */
 class restore_quizaccess_announcements_subplugin extends restore_mod_quiz_access_subplugin {
 
     /**

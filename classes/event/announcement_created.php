@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace quizaccess_announcements\event;
+
 /**
  * The announcement added event class for the quizaccess_announcements plugin.
  *
@@ -21,8 +23,6 @@
  * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace quizaccess_announcements\event;
-
 class announcement_created extends \core\event\base {
 
     /**
@@ -76,6 +76,11 @@ class announcement_created extends \core\event\base {
         }
     }
 
+    /**
+     * Mapping for restoring course logs.
+     *
+     * @return array mapping the values for restoring
+     */
     public static function get_objectid_mapping() {
         return ['db' => 'quizaccess_announcements_ann', 'restore' => 'announcement'];
     }

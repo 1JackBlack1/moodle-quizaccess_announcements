@@ -14,13 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Implementation of the quizaccess_announcements plugin.
- *
- * @package    quizaccess_announcements
- * @copyright  Jeffrey Black
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 defined('MOODLE_INTERNAL') || die();
 
 // Aliases for Moodle < 4.2.
@@ -31,10 +24,10 @@ if (!(class_exists('\mod_quiz\local\access_rule_base'))) {
 }
 
 /**
- * A rule for ensuring that the quiz is opened in a popup, with some JavaScript
- * to prevent copying and pasting, etc.
+ * Implementation of the quizaccess_announcements plugin.
  *
- * @copyright  2009 Tim Hunt
+ * @package    quizaccess_announcements
+ * @copyright  Jeffrey Black
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
@@ -42,7 +35,7 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
     /**
      * Return an appropriately configured instance of this rule, if it is applicable
      * to the given quiz, otherwise return null.
-     * @param quiz $quizobj information about the quiz in question.
+     * @param \mod_quiz\quiz_settings $quizobj information about the quiz in question.
      * @param int $timenow the time that should be considered as 'now'.
      * @param bool $canignoretimelimits whether the current user is exempt from
      *      time limits by the mod/quiz:ignoretimelimits capability.
@@ -153,7 +146,7 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
 
     /**
      * Add any fields that this rule requires to the quiz settings form. This
-     * method is called from {@link mod_quiz_mod_form::definition()}, while the
+     * method is called from {@see mod_quiz_mod_form::definition()}, while the
      * security seciton is being built.
      * @param mod_quiz_mod_form $quizform the quiz settings form that is being built.
      * @param MoodleQuickForm $mform the wrapped MoodleQuickForm.
@@ -234,7 +227,7 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
     }
 
     /**
-     * Validate the data from any form fields added using {@link add_settings_form_fields()}.
+     * Validate the data from any form fields added using {@see add_settings_form_fields()}.
      * @param array $errors the errors found so far.
      * @param array $data the submitted form data.
      * @param array $files information about any uploaded files.
@@ -272,7 +265,7 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
 
     /**
      * Save any submitted settings when the quiz settings form is submitted. This
-     * is called from {@link quiz_after_add_or_update()} in lib.php.
+     * is called from {@see quiz_after_add_or_update()} in lib.php.
      * @param object $quiz the data from the quiz form, including $quiz->id
      *      which is the id of the quiz being saved.
      */
@@ -320,7 +313,7 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
 
     /**
      * Delete any rule-specific settings when the quiz is deleted. This is called
-     * from {@link quiz_delete_instance()} in lib.php.
+     * from {@see quiz_delete_instance()} in lib.php.
      * @param object $quiz the data from the database, including $quiz->id
      *      which is the id of the quiz being deleted.
      * @since Moodle 2.7.1, 2.6.4, 2.5.7
@@ -342,10 +335,10 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
     /**
      * Return the bits of SQL needed to load all the settings from all the access
      * plugins in one DB query. The easiest way to understand what you need to do
-     * here is probalby to read the code of {@link quiz_access_manager::load_settings()}.
+     * here is probalby to read the code of {@see quiz_access_manager::load_settings()}.
      *
      * If you have some settings that cannot be loaded in this way, then you can
-     * use the {@link get_extra_settings()} method instead, but that has
+     * use the {@see get_extra_settings()} method instead, but that has
      * performance implications.
      *
      * @param int $quizid the id of the quiz we are loading settings for. This

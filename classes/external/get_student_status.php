@@ -14,13 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Define get_student_status service for the quizaccess_announcements plugin.
- *
- * @package    quizaccess_announcements
- * @copyright  Jeffrey Black
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 namespace quizaccess_announcements\external;
 
 // Aliases for Moodle < 4.2.
@@ -37,6 +30,13 @@ use context_module;
 use DateTime;
 use stdClass;
 
+/**
+ * Define get_student_status service for the quizaccess_announcements plugin.
+ *
+ * @package    quizaccess_announcements
+ * @copyright  Jeffrey Black
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class get_student_status extends \core_external\external_api {
 
     /**
@@ -54,11 +54,10 @@ class get_student_status extends \core_external\external_api {
     /**
      * Get last time students have accessed quiz.
      *
-     * @param string $quizid Quiz ID.
-     * @param string $last timestamp of the last announcement that had been fetched.
+     * @param string $quizid Quiz ID
      * @return array with 2 elements:
-     *     1. last: the details of the last announcement.
-     *     2. status: the details of student status.
+     *     1. last: the details of the last announcement
+     *     2. status: the details of student status
      */
     public static function execute(string $quizid ): array {
         global $DB;

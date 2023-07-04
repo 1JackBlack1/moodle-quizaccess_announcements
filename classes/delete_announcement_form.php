@@ -14,28 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Defines the add announcement form class for the quizaccess_announcements plugin.
- * Used to confirm before the announcement is actually deleted.
- *
- * @package    quizaccess_announcements
- * @copyright  Jeffrey Black
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 namespace quizaccess_announcements;
 
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir.'/formslib.php');
 
+/**
+ * Defines the add announcement form class for the quizaccess_announcements plugin.
+ *
+ * Used to confirm before the announcement is actually deleted.
+ *
+ * @package    quizaccess_announcements
+ * @copyright  Jeffrey Black
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class delete_announcement_form extends \moodleform {
-    /** The id of the quiz */
+    /** @var int The id of the quiz */
     private $quizid;
-    /** The id of the announcement to delete */
+    /** @var int The id of the announcement to delete */
     private $delete;
-    /** A boolean flag to indicate all announcements should be deleted */
+    /** @var bool A boolean flag to indicate all announcements should be deleted */
     private $deleteall;
-    /** rendered HTML of announcemnents that are up for deleting */
+    /** @var string rendered HTML of announcemnents that are up for deleting */
     private $announcements;
 
     /**
@@ -55,6 +56,7 @@ class delete_announcement_form extends \moodleform {
         parent::__construct('delete.php');
     }
 
+    /** Function providing the form definition */
     public function definition() {
         $mform = $this->_form;
 

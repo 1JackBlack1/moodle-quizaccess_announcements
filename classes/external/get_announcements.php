@@ -14,13 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Define get_announcement service for the quizaccess_announcements plugin.
- *
- * @package    quizaccess_announcements
- * @copyright  Jeffrey Black
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 namespace quizaccess_announcements\external;
 
 // Aliases for Moodle < 4.2.
@@ -35,6 +28,13 @@ if (!(class_exists('\core_external\external_api'))) {
 use quizaccess_announcements\announcement_manager;
 use context_module;
 
+/**
+ * Define get_announcement service for the quizaccess_announcements plugin.
+ *
+ * @package    quizaccess_announcements
+ * @copyright  Jeffrey Black
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class get_announcements extends \core_external\external_api {
 
     /**
@@ -54,11 +54,11 @@ class get_announcements extends \core_external\external_api {
     /**
      * Get announcements for a quiz.
      *
-     * @param string $quizid Quiz ID.
-     * @param string $last timestamp of the last announcement that had been fetched.
+     * @param string $quizid Quiz ID
+     * @param string $lasttime timestamp of the last announcement that had been fetched
      * @return array with 2 elements:
-     *     1. content: the HTML of any new announcements.
-     *     2. lasttime: the unix timestamp the announcements were fetched.
+     *     1. content: the HTML of any new announcements
+     *     2. lasttime: the unix timestamp the announcements were fetched
      */
     public static function execute(string $quizid, string $lasttime): array {
         list('quizid' => $quizid, 'lasttime' => $lasttime

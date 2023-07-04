@@ -75,6 +75,6 @@ $now = time();
 $lastposted = \quizaccess_announcements\last_posted::get_obj($quizid, $now);
 $table = new \quizaccess_announcements\status_table('quizaccess_announcements_status',
     $context, $quizid, $url, $lastposted, $rule->checkinterval, $now);
-$output->monitor_page($rule, $context, $lastposted, $table, $now);
+$output->monitor_page($rule, $context, $lastposted, $table);
 $event = \quizaccess_announcements\event\student_status_viewed::create(['context' => $context]);
 $event->trigger();

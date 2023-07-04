@@ -42,7 +42,6 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
      * @return quiz_access_rule_base|null the rule, if applicable, else null.
      */
     public static function make(\mod_quiz\quiz_settings $quizobj, $timenow, $canignoretimelimits) {
-        global $PAGE;
         if (empty($quizobj->get_quiz()->announcements_use)) {
             return null;
         }
@@ -238,7 +237,6 @@ class quizaccess_announcements extends \mod_quiz\local\access_rule_base {
             array $data, $files, mod_quiz_mod_form $quizform) {
         if (empty($data['announcements_use'])) {
             return $errors;
-            die;
         }
         // Get admin settings for defaults.
         $admin = get_config('quizaccess_announcements');

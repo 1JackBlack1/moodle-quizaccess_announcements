@@ -84,7 +84,7 @@ class deleter {
      */
     public static function delete_statuses($quizid) {
         global $DB;
-        $announcements = $DB->delete_records('quizaccess_announcements_sta',
+        $DB->delete_records('quizaccess_announcements_sta',
             ['quizid' => $quizid]);
     }
 

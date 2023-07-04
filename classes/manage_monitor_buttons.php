@@ -64,7 +64,6 @@ class manage_monitor_buttons {
      * @return string html of monitor status button.
      */
     public static function monitor_button($quizid, $context) {
-        $output = '';
         if (!(has_capability('quizaccess/announcements:view_status', $context))) {
             return '';
         }

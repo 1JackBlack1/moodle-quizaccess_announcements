@@ -80,10 +80,9 @@ class quizaccess_announcements_renderer extends plugin_renderer_base {
      * @param object $context the context module for the quiz.
      * @param object $lastposted the last posted announcement.
      * @param object $table the status table.
-     * @param int $now the unix timestamp of the current time.
      * Needs to output to avoid output buffering of table.
      */
-    public function monitor_page($rule, $context, $lastposted, $table, $now) {
+    public function monitor_page($rule, $context, $lastposted, $table) {
         $admin = get_config('quizaccess_announcements');
         $data = new stdClass();
         $data->quizid = $rule->quizid;

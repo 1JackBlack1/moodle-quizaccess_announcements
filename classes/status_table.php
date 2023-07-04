@@ -76,7 +76,6 @@ class status_table extends table_sql {
         $from .= "\n" . $canattempt->joins;
         $from .= "\n" . 'LEFT JOIN {quizaccess_announcements_sta} sta ON sta.userid = u.id AND sta.quizid = :quizid ';
         $params = array_merge($userfields->params, $canattempt->params, ['quizid' => $quizid]);
-        $joins = $canattempt->joins;
         $wheres = $canattempt->wheres;
         $this->set_sql($fields, $from, $wheres, $params);
         $this->define_columns($columns);

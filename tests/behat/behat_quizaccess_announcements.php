@@ -52,7 +52,6 @@ class behat_quizaccess_announcements extends behat_base {
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
     protected function resolve_page_instance_url(string $type, string $quizname): moodle_url {
-        global $DB;
         $quizid = $this->get_quizid_by_name($quizname);
 
         switch (strtolower($type)) {

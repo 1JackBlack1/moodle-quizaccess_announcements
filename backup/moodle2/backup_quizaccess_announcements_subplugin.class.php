@@ -57,7 +57,7 @@ class backup_quizaccess_announcements_subplugin extends backup_mod_quiz_access_s
         $subplugintableannouncements->set_source_table('quizaccess_announcements_ann', ['quizid' => $quizid]);
 
         // Add files.
-        $subplugintablesettings->annotate_files('quizaccess_announcements', 'header', 'id');
+        $subplugintablesettings->annotate_files('quizaccess_announcements', 'header', null);
         $subplugintableannouncements->annotate_files('quizaccess_announcements', 'announcement', 'id');
 
         return $subplugin;

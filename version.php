@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-$plugin->version = 2023050705;
+$plugin->version = 2023050720;
 $plugin->requires = 2022041200;
 $plugin->component = 'quizaccess_announcements';
-$plugin->release = 'v1.0.2';
+$plugin->release = 'v1.0.3';

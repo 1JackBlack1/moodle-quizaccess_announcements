@@ -107,7 +107,7 @@ class get_student_status extends \core_external\external_api {
                 'str' => new \core_external\external_value(PARAM_RAW, 'String to appear above table',
                     VALUE_REQUIRED, 0, NULL_NOT_ALLOWED),
                 ]),
-            'status' => new \core_external\external_multiple_structure(new \core_external\external_single_structure([
+            'status' => new external_multiple_structure(new \core_external\external_single_structure([
                 'userid' => new \core_external\external_value(PARAM_INT, 'The id of the user.',
                     VALUE_REQUIRED, 0, NULL_NOT_ALLOWED),
                 'time' => new \core_external\external_value(PARAM_INT, 'The timestamp the student fetched the announcements.',
